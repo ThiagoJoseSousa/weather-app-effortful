@@ -6,9 +6,27 @@
 <link rel="icon" type="image/x-icon" href="../src/images/favicon.ico">
 </head>
 <body>
-<form>
-    <input type="text" > 
+    <main>
+        <div id="formContainer">
+<form name="search" action="" method="get" id="form">
+    <input type="text" name="inputbox" id="location" placeholder="City"/> 
+    <input type="button" name="button" value="Search" onclick="" />
+    <label for=#unit><br>Temperature unit</label>
+    <select name="temperatureUnit" >
+        <!-- units must be:standard=kelvin, metric=celsius or imperial=fahrenheit-->
+        <option value="standard" >Kelvin</option>
+        <option value="imperial">Fahrenheit</option>
+        <option value="metric">Celsius</option>
+    </select>
+    
 </form>
+
+   <div id="currentData">
+
+   </div>
+    </main>
+    <div id="previousDataContainer">
+    </div>
     <script src="../src/index.js" type="module"></script>
 </body>
 
