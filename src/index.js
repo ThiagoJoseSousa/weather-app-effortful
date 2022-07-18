@@ -7,21 +7,24 @@ let temperatureUnit= formdata.get("temperatureUnit");
 
 });} 
 
+
+
+
 //factory function, clear div, add to div, displaying It. 
 // I will make an array to store the objects created by weather factory, using the scope of a function It'll be easy to create without repeating name
 
 
 let weatherObjects = [];
-
+const store = () => {
 const weatherFactory = (weather,temp, temp_max, temp_min, pressure,humidity) => {
 return {weather, temp, temp_max, temp_min, pressure, humidity}
 }
-const createObjects = () => { 
-    const lastObject = weatherFactory(weather, temp, temp_max, temp_min, pressure, humidity);
+const pushObjects = () => { 
+    const lastObject = weatherFactory(getWeather);
 weatherObjects.push(lastObject);
 
 }
-
+}
 
 const getWeather = () => {
 
@@ -37,6 +40,7 @@ fetch (`https://api.openweathermap.org/data/2.5/weather?q=${cityname}&appid=8b4e
     let temp_min=response.main.temp_min;
     let pressure=response.main.pressure;
     let humidity=response.main.humidity;
+return weather,temp,temp_max,temp_min,pressure,humidity;
   });
 
-}
+} // when getWeather ends pushObjects must happen.
