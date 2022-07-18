@@ -15,18 +15,21 @@ let temperatureUnit= formdata.get("temperatureUnit");
 
 
 let weatherObjects = [];
+
 const store = () => {
 const weatherFactory = (weather,temp, temp_max, temp_min, pressure,humidity) => {
 return {weather, temp, temp_max, temp_min, pressure, humidity}
 }
-const pushObjects = () => { 
-    const lastObject = weatherFactory(getWeather);
+const pushObjects = (args) => { 
+    const lastObject = weatherFactory(args);
 weatherObjects.push(lastObject);
 
 }
 }
 
 const getWeather = () => {
+let cityname="Carapicuiba";
+let temperatureUnit="metric";
 
 fetch (`https://api.openweathermap.org/data/2.5/weather?q=${cityname}&appid=8b4e96d7d03aca7a84c60917ff96fa26&units=${temperatureUnit}`, 
 { mode:'cors'})
@@ -40,7 +43,10 @@ fetch (`https://api.openweathermap.org/data/2.5/weather?q=${cityname}&appid=8b4e
     let temp_min=response.main.temp_min;
     let pressure=response.main.pressure;
     let humidity=response.main.humidity;
-return weather,temp,temp_max,temp_min,pressure,humidity;
+  
+store.pushObjects(weather,temp,temp_max,temp_min,pressure,humidity);
+console.log(weatherObjects[0]);
   });
 
 } // when getWeather ends pushObjects must happen.
+getWeather();
