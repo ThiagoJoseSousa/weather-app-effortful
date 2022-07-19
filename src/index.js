@@ -107,13 +107,43 @@ break;
 const displayOldSearches = () => {
 
 let previousDataContainer = document.getElementById("previousDataContainer");
-previousDataContainer.textContent=''; // cleans the DOM
-weatherObjects.forEach((item) => { // reads array(put index on foreach to generate dynamic id)
+previousDataContainer.textContent=''; // clears the DATA
+weatherObjects.forEach((item, index) => { // reads array(put index on foreach to generate dynamic id)
   let newCard = document.createElement('div');
-  newCard.textContent=item.name;
+  newCard.textContent=item.name + ' see more';
+  newCard.setAttribute('data-index', index); //added now with index
   previousDataContainer.appendChild(newCard);
 
 })
 }
+
+//add show/hide card. code below is test, cant be acessing dom like this
+
+const showMore= (event)=>{
+  const element = event.target;
+  const index = element.dataset.index;
+    fullItem (element,index);
+}
+
+const fullItem = (element, index) => {
+  // from the index I receive, I want to show all of its information(your own div will grow)
+  let fullInfo=weatherObjects[index]
+  let txt="";
+  for (let x in fullInfo) {
+  txt += x + ": " + fullInfo[x] + "<br>";
+  };
+
+element.innerHTML=txt;
+//how to show only name again? When hitting search only name is showed, fix both.  
+}
+
+document.getElementById('previousDataContainer').addEventListener('click', showMore);
+
+//tomorrow restudy and redo the code, and fix those. 
+
+
+
+
+
 
 
