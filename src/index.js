@@ -42,8 +42,21 @@ fetch (`https://api.openweathermap.org/data/2.5/weather?q=${cityname}&appid=8b4e
     let humidity=response.main.humidity;
   
 pushObjects(weather,temp,temp_max,temp_min,pressure,humidity);
-console.log(weatherObjects[0]);
+displayLastSearch();
+
   });
 
 } // when getWeather ends pushObjects must happen.
 getWeather();
+
+const displayLastSearch = () => {
+  let divLastSearch= document.getElementById("currentData");
+  let lastElement = weatherObjects[weatherObjects.length-1];
+  let txt = "";
+  //understand below
+for (let x in lastElement) {
+txt += x + ": " + lastElement[x] + "<br>";
+};
+divLastSearch.innerHTML=txt;
+}
+
