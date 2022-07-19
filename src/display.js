@@ -11,3 +11,14 @@ const displayLastSearch = () => {
   divLastSearch.innerHTML=txt;
   }
 
+//next div will be an array reader, and there will be a function that add txt to those objects.(show more)
+
+const displayOldSearches = () => {
+let previousDataContainer = document.getElementById("previousDataContainer");
+weatherObjects.forEach((item) => {
+    let newCard = document.createElement('div');
+    newCard.innerHTML=item; // (put index on foreach to generate dynamic id)
+    previousDataContainer.appendChild(newCard);
+
+})
+}
