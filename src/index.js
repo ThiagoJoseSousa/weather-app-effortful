@@ -29,13 +29,16 @@ weatherObjects.push(lastObject);
 const getWeather = (input, temperature) => {
 let cityname=input;
 let temperatureUnit=temperature;
-
+let loader = `<div class="loader"></div>`;
+let currentData=document.getElementById('currentData');
+currentData.innerHTML = loader;
 fetch (`https://api.openweathermap.org/data/2.5/weather?q=${cityname}&appid=8b4e96d7d03aca7a84c60917ff96fa26&units=${temperatureUnit}`, 
 { mode:'cors'})
 .then(function(response) {
     return response.json();
   })
   .then(function(response) {
+    currentData. textContent="city not found";
     let weather=response.weather[0].main;
     let temp=response.main.temp;
     let temp_max=response.main.temp_max;
@@ -110,7 +113,7 @@ let previousDataContainer = document.getElementById("previousDataContainer");
 previousDataContainer.textContent=''; // clears the DATA
 weatherObjects.forEach((item, index) => { // reads array(put index on foreach to generate dynamic id)
   let newCard = document.createElement('div');
-  newCard.textContent=item.name + ' see more';
+  newCard.textContent=item.name;
   newCard.setAttribute('data-index', index); //added now with index
   newCard.setAttribute('data-click', '0');
   previousDataContainer.appendChild(newCard);
