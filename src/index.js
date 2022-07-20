@@ -112,17 +112,26 @@ weatherObjects.forEach((item, index) => { // reads array(put index on foreach to
   let newCard = document.createElement('div');
   newCard.textContent=item.name + ' see more';
   newCard.setAttribute('data-index', index); //added now with index
+  newCard.setAttribute('data-click', '0');
   previousDataContainer.appendChild(newCard);
 
 })
 }
 
 //add show/hide card. code below is test, cant be acessing dom like this
+const displayDecide= (event)=>{
 
-const showMore= (event)=>{
   const element = event.target;
   const index = element.dataset.index;
-    fullItem (element,index);
+// decides between showname or fullitem
+if ( element.dataset.click%2==0) {
+  element.dataset.click++;
+fullItem(element,index)
+}
+else {
+  element.dataset.click++
+  showName(element,index)};
+
 }
 
 const fullItem = (element, index) => {
@@ -134,16 +143,19 @@ const fullItem = (element, index) => {
   };
 
 element.innerHTML=txt;
-//how to show only name again? When hitting search only name is showed, fix both.  
 }
 
-document.getElementById('previousDataContainer').addEventListener('click', showMore);
 
-//tomorrow restudy and redo the code, and fix those. 
+const showName= (element,index) => {
+// I want to activate this if the user clicks on the div again, and then switch to the other.Likely by using remainder %
+let fullInfo=weatherObjects[index]
+let txt=fullInfo.name;
+element.innerHTML=txt;
 
 
+}
 
+document.getElementById('previousDataContainer').addEventListener('click', displayDecide);
 
-
-
+// I discovered I can do the above with <details> and summary on html5, but decided to proceed this way. 
 
